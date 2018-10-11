@@ -1,0 +1,12 @@
+{
+    "name": "sumonselim/llc04-ecommerce",
+    "description": "Ecommerce platform using PHP",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Muhammad Sumon Molla Selim",
+            "email": "me@sumonselim.com"
+        }
+    ],
+    "require": {}
+}

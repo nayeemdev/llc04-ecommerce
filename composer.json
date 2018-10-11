@@ -8,5 +8,7 @@
             "email": "me@sumonselim.com"
         }
     ],
-    "require": {}
+    "require": {
+        "phpmailer/phpmailer": "^6.0"
+    }
 }

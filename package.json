@@ -1,0 +1,16 @@
+{
+  "name": "llc04-ecommerce",
+  "version": "1.0.0",
+  "description": "Ecommerce project developed using PHP",
+  "main": "index.js",
+  "repository": "https://github.com/SumonMSelim/llc04-ecommerce.git",
+  "author": "Muhammad Sumon Molla Selim <me@sumonselim.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^4.1.3",
+    "feather-icons": "^4.7.3",
+    "holderjs": "^2.9.6",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.4"
+  }
+}

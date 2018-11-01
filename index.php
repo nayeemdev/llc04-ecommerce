@@ -10,9 +10,8 @@ require_once 'vendor/autoload.php';
 
 $router = new RouteCollector(new RouteParser());
 
-$router->get('/', function () {
-    return 'Hello from LLC';
-});
+$router->controller('/', \App\Controllers\HomeController::class);
+$router->controller('/users', \App\Controllers\UsersController::class);
 
 $dispatcher = new Dispatcher($router->getData());
 try {

@@ -10,8 +10,7 @@ require_once 'vendor/autoload.php';
 
 $router = new RouteCollector(new RouteParser());
 
-$router->controller('/', \App\Controllers\HomeController::class);
-$router->controller('/users', \App\Controllers\UsersController::class);
+require_once __DIR__ . '/routes.php';
 
 $dispatcher = new Dispatcher($router->getData());
 try {

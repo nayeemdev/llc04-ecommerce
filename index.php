@@ -8,6 +8,7 @@ use Phroute\Phroute\RouteCollector;
 use Phroute\Phroute\RouteParser;
 
 require_once 'vendor/autoload.php';
+session_start();
 
 $capsule = new Capsule();
 $capsule->addConnection([

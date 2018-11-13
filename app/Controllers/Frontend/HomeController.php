@@ -13,12 +13,12 @@ class HomeController extends Controller
 {
     public function getIndex(): void
     {
-        $this->view('home');
+        view('home');
     }
 
     public function getRegister(): void
     {
-        $this->view('register');
+        view('register');
     }
 
     public function postRegister(): void
@@ -102,7 +102,7 @@ class HomeController extends Controller
 
     public function getLogin(): void
     {
-        $this->view('login');
+        view('login');
     }
 
     public function postLogin(): void
@@ -134,6 +134,11 @@ class HomeController extends Controller
 
                 if (password_verify($password, $user->password) === true) {
                     $_SESSION['success'] = 'Logged in.';
+                    $_SESSION['user'] = [
+                        'id' => $user->id,
+                        'email' => $user->email,
+                        'username' => $user->username,
+                    ];
                     header('Location: /dashboard');
                     exit();
                 }
@@ -177,6 +182,15 @@ class HomeController extends Controller
 
         $errors[] = 'Invalid token provided';
         $_SESSION['errors'] = $errors;
+        header('Location: /login');
+        exit();
+    }
+
+    public function getLogout(): void
+    {
+        unset($_SESSION['user']);
+
+        $_SESSION['success'] = 'You have been logged out.';
         header('Location: /login');
         exit();
     }

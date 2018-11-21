@@ -33,15 +33,63 @@ class CategoryController extends Controller
         if (empty($errors)) {
             Category::create([
                 'title' => $title,
-                'slug' => $slug,
+                'slug' => strtolower($slug),
                 'active' => $active,
             ]);
 
             $_SESSION['success'] = 'Category created';
-            redirect('categories');
+            redirect('dashboard/categories');
         }
 
         $_SESSION['errors'] = $errors;
         redirect('categories');
+    }
+
+    public function getEdit($id = null)
+    {
+        if ($id === null) {
+            redirect('dashboard/categories');
+        }
+        $_SESSION['category_id'] = $id;
+
+        view('backend/category/edit');
+        unset($_SESSION['category_id']);
+    }
+
+    public function postEdit($id = null)
+    {
+        if ($id === null) {
+            redirect('dahsboard/categories');
+        }
+
+        $validator = new Validator();
+        $errors = [];
+        $title = $_POST['title'];
+        $slug = $_POST['slug'];
+        $active = $_POST['active'];
+
+        // validation
+        if ($validator::alpha()->validate($title) === false) {
+            $errors['title'] = 'Title can only contain alphabets';
+        }
+
+        if ($validator::slug()->validate($slug) === false) {
+            $errors['slug'] = 'Slug must be valid slug';
+        }
+
+        try {
+            $category = Category::find($id);
+            $category->update([
+                'title' => $title,
+                'slug' => strtolower($slug),
+                'active' => $active,
+            ]);
+
+            $_SESSION['success'] = 'Category updated';
+            redirect('dashboard/categories');
+        } catch (\Exception $e) {
+            $_SESSION['errors'] = ['message' => $e->getMessage()];
+            redirect('dashboard/categories');
+        }
     }
 }

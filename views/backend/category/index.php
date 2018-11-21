@@ -33,27 +33,45 @@
             </form>
 
             <div>
-                <table class="table table-bordered">
-                    <thead>
+                <?php $categories = \App\Models\Category::all(); ?>
+
+                <?php if ($categories->count() > 0): ?>
+
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
                             <td>ID</td>
                             <td>Title</td>
                             <td>Slug</td>
+                            <td>Status</td>
+                            <td>Action</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $categories = \App\Models\Category::all();
-                    foreach ($categories as $category):
-                    ?>
-                        <tr>
-                            <td><?php echo $category->id; ?></td>
-                            <td><?php echo $category->title; ?></td>
-                            <td><?php echo $category->slug; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <?php
+                        foreach ($categories as $category):
+                            ?>
+                            <tr>
+                                <td><?php echo $category->id; ?></td>
+                                <td><?php echo $category->title; ?></td>
+                                <td><?php echo $category->slug; ?></td>
+                                <td><?php echo $category->active === 1 ? 'Active' : 'Inactive'; ?></td>
+                                <td>
+                                    <a href="/dashboard/categories/edit/<?php echo $category->id; ?>" class="badge badge-info">
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+
+                <?php else: ?>
+                    <div class="alert alert-info">
+                        No category found. Please add one.
+                    </div>
+                <?php endif; ?>
+
             </div>
 
         </main>

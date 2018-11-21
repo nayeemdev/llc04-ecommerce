@@ -7,10 +7,10 @@
     <title>LLC04 Ecommerce System</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../assets/css/app.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>/assets/css/app.css" rel="stylesheet">
 </head>
 
 <body>

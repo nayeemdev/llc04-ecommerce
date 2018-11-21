@@ -10,6 +10,8 @@ use Phroute\Phroute\RouteParser;
 require_once 'vendor/autoload.php';
 session_start();
 
+define('BASE_URL', 'http://llc04-ecommerce.sumon');
+
 $capsule = new Capsule();
 $capsule->addConnection([
     'driver' => 'mysql',

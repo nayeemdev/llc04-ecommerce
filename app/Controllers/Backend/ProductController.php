@@ -3,6 +3,7 @@
 namespace App\Controllers\Backend;
 
 use App\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Respect\Validation\Validator;
 
@@ -10,7 +11,10 @@ class ProductController extends Controller
 {
     public function getIndex(): void
     {
-        view('backend/product/index');
+        $categories = Category::all();
+        $products = Product::all();
+
+        view('backend/product/index', ['categories' => $categories, 'products' => $products]);
     }
 
     public function postIndex(): void

@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
     public function getIndex(): void
     {
-        view('backend/category/index');
+        $categories = Category::all();
+
+        view('backend/category/index', ['categories' => $categories]);
     }
 
     public function postIndex(): void

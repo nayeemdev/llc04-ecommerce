@@ -26,10 +26,6 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="slug">Slug</label>
-                    <input type="text" name="slug" placeholder="Enter Slug" class="form-control">
-                </div>
-                <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" name="description" placeholder="Enter Description"></textarea>
                 </div>

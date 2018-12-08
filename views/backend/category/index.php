@@ -17,10 +17,6 @@
                     <input type="text" name="title" placeholder="Enter Title" class="form-control">
                 </div>
                 <div class="form-group">
-                    <label for="slug">Slug</label>
-                    <input type="text" name="slug" placeholder="Enter Slug" class="form-control">
-                </div>
-                <div class="form-group">
                     <label for="status">Status</label>
                     <select name="active" id="" class="form-control">
                         <option value="1">Active</option>

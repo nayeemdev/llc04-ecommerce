@@ -8,17 +8,17 @@ use Respect\Validation\Validator;
 
 class CategoryController extends Controller
 {
-    public function getIndex()
+    public function getIndex(): void
     {
         view('backend/category/index');
     }
 
-    public function postIndex()
+    public function postIndex(): void
     {
         $validator = new Validator();
         $errors = [];
         $title = $_POST['title'];
-        $slug = $_POST['slug'];
+        $slug = $this->slugify($_POST['title']);
         $active = $_POST['active'];
 
         // validation
@@ -45,7 +45,7 @@ class CategoryController extends Controller
         redirect('categories');
     }
 
-    public function getEdit($id = null)
+    public function getEdit($id = null): void
     {
         if ($id === null) {
             redirect('dashboard/categories');
@@ -56,10 +56,10 @@ class CategoryController extends Controller
         unset($_SESSION['category_id']);
     }
 
-    public function postEdit($id = null)
+    public function postEdit($id = null): void
     {
         if ($id === null) {
-            redirect('dahsboard/categories');
+            redirect('dashboard/categories');
         }
 
         $validator = new Validator();
@@ -73,27 +73,28 @@ class CategoryController extends Controller
             $errors['title'] = 'Title can only contain alphabets';
         }
 
-        if ($validator::slug()->validate($slug) === false) {
-            $errors['slug'] = 'Slug must be valid slug';
+        if (empty($errors)) {
+            try {
+                $category = Category::find($id);
+                $category->update([
+                    'title' => $title,
+                    'slug' => strtolower($slug),
+                    'active' => $active,
+                ]);
+
+                $_SESSION['success'] = 'Category updated';
+                redirect('dashboard/categories');
+            } catch (\Exception $e) {
+                $_SESSION['errors'] = ['message' => $e->getMessage()];
+                redirect('dashboard/categories');
+            }
         }
 
-        try {
-            $category = Category::find($id);
-            $category->update([
-                'title' => $title,
-                'slug' => strtolower($slug),
-                'active' => $active,
-            ]);
-
-            $_SESSION['success'] = 'Category updated';
-            redirect('dashboard/categories');
-        } catch (\Exception $e) {
-            $_SESSION['errors'] = ['message' => $e->getMessage()];
-            redirect('dashboard/categories');
-        }
+        $_SESSION['errors'] = $errors;
+        redirect('dashboard/categories');
     }
 
-    public function getDelete($id = null)
+    public function getDelete($id = null): void
     {
         if ($id === null) {
             redirect('dashboard/category');

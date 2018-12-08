@@ -24,6 +24,7 @@ class ProductController extends Controller
         $price = $_POST['price'];
         $sales_price = $_POST['sales_price'];
         $active = (int) $_POST['active'];
+        $product_photo = $_FILES['product_photo'];
 
         // validation
         if ($validator::length(2, 255)->validate($title) === false) {
@@ -43,7 +44,7 @@ class ProductController extends Controller
         }
 
         if (empty($errors)) {
-            Product::create([
+            $product = Product::create([
                 'title' => $title,
                 'category_id' => $category_id,
                 'slug' => $slug,
@@ -51,6 +52,16 @@ class ProductController extends Controller
                 'price' => $price,
                 'sales_price' => $sales_price,
                 'active' => $active,
+            ]);
+
+            // process file upload
+            $file_name = 'product_'.time();
+            $extension = explode('.', $product_photo['name']);
+            $ext = end($extension);
+            move_uploaded_file($product_photo['tmp_name'], 'media/products/'.$file_name.'.'.$ext);
+
+            $product->product_photo()->create([
+                'image_path' => $file_name.'.'.$ext,
             ]);
 
             $_SESSION['success'] = 'Product created';

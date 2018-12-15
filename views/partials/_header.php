@@ -27,8 +27,11 @@
                 <div class="col-sm-4 offset-md-1 py-4">
                     <h4 class="text-white">Menu</h4>
                     <ul class="list-unstyled">
-                        <li><a href="/register" class="text-white">Register</a></li>
-                        <li><a href="/login" class="text-white">Login</a></li>
+                        <?php foreach ($categories as $category): ?>
+                            <li>
+                                <a href="/category/<?php echo $category->slug; ?>"><?php echo $category->title; ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
             </div>

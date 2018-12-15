@@ -3,6 +3,8 @@
 namespace App\Controllers\Frontend;
 
 use App\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Product;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
@@ -13,7 +15,10 @@ class HomeController extends Controller
 {
     public function getIndex(): void
     {
-        view('home');
+        $categories = Category::select(['slug', 'title'])->get();
+        $products = Product::with('product_photo')->select(['id', 'title', 'price', 'slug'])->where('active', 1)->get();
+
+        view('home', ['categories' => $categories, 'products' => $products]);
     }
 
     public function getRegister(): void
@@ -193,5 +198,17 @@ class HomeController extends Controller
         $_SESSION['success'] = 'You have been logged out.';
         header('Location: /login');
         exit();
+    }
+
+    public function getProduct($slug = null)
+    {
+        if ($slug === null) {
+            redirect('/');
+        }
+
+        $categories = Category::select(['slug', 'title'])->get();
+        $product = Product::where('slug', $slug)->first();
+
+        view('product', ['product' => $product, 'categories' => $categories]);
     }
 }

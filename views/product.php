@@ -11,7 +11,7 @@
                 <aside class="col-sm-5 border-right">
                     <article class="gallery-wrap">
                         <div>
-                                <img src="/media/products/<?php echo $product->product_photo->image_path; ?>" class="card-img-top" >
+                            <img src="/media/products/<?php echo $product->product_photo->image_path; ?>" class="card-img-top" alt="">
                         </div> <!-- slider-product.// -->
                     </article> <!-- gallery-wrap .end// -->
                 </aside>
@@ -35,7 +35,12 @@
                         </dl>
                         <hr>
 
-                        <a href="#" class="btn btn-lg btn-outline-primary text-uppercase"> <i class="fas fa-shopping-cart"></i> Add to cart </a>
+                        <form action="/cart" method="post">
+                            <input type="hidden" name="id" value="<?php echo $product->id; ?>">
+                            <button type="submit" class="btn btn-lg btn-outline-primary text-uppercase">
+                                Add to Cart
+                            </button>
+                        </form>
                     </article> <!-- card-body.// -->
                 </aside> <!-- col.// -->
             </div> <!-- row.// -->

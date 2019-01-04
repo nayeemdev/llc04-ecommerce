@@ -17,8 +17,13 @@ if (! function_exists('partial_view')) {
 }
 
 if (! function_exists('redirect')) {
-    function redirect($location = '/')
+    function redirect($location = '/', $base = false)
     {
+        if ($base) {
+            header('Location: '.$location);
+            exit();
+        }
+
         header('Location: '.BASE_URL.'/'.$location);
         exit();
     }

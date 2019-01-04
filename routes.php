@@ -12,6 +12,7 @@ $router->filter('auth', function () {
 });
 
 $router->controller('/', \App\Controllers\Frontend\HomeController::class);
+$router->controller('/cart', \App\Controllers\Frontend\CartController::class);
 
 $router->group(['before' => 'auth', 'prefix' => 'dashboard'], function (RouteCollector $router) {
     $router->controller('/', \App\Controllers\Backend\DashboardController::class);

@@ -61,6 +61,16 @@
                             </form>
                         </td>
                     </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">
+                            <a href="/checkout" class="btn btn-outline-success">
+                                Checkout
+                            </a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             <?php endif; ?>

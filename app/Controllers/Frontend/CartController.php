@@ -3,16 +3,18 @@
 namespace App\Controllers\Frontend;
 
 use App\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 
 class CartController extends Controller
 {
     public function getIndex(): void
     {
+        $categories = Category::select(['slug', 'title'])->get();
         $cart = $_SESSION['cart'] ?? [];
         $sum = array_sum(array_column($cart, 'total_price'));
 
-        view('cart', ['cart' => $cart, 'sum' => $sum]);
+        view('cart', ['cart' => $cart, 'sum' => $sum, 'categories' => $categories]);
     }
 
     public function postIndex(): void

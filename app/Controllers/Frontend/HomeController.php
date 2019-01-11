@@ -23,7 +23,9 @@ class HomeController extends Controller
 
     public function getRegister(): void
     {
-        view('register');
+        $categories = Category::select(['slug', 'title'])->get();
+
+        view('register', ['categories' => $categories]);
     }
 
     public function postRegister(): void
@@ -76,8 +78,8 @@ class HomeController extends Controller
                 $mail->isSMTP();                                      // Set mailer to use SMTP
                 $mail->Host = 'smtp.mailtrap.io';  // Specify main and backup SMTP servers
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
-                $mail->Username = 'da24cc67e9bb79';                 // SMTP username
-                $mail->Password = 'dc5778bc9b1351';                           // SMTP password
+                $mail->Username = 'af2a20736cc551';                 // SMTP username
+                $mail->Password = 'c617b024b04e5e';                           // SMTP password
                 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->Port = 2525;                                 // TCP port to connect to
                 //Recipients
@@ -107,7 +109,9 @@ class HomeController extends Controller
 
     public function getLogin(): void
     {
-        view('login');
+        $categories = Category::select(['slug', 'title'])->get();
+
+        view('login', ['categories' => $categories]);
     }
 
     public function postLogin(): void

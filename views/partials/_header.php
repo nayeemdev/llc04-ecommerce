@@ -32,6 +32,39 @@
                                 <a href="/category/<?php echo $category->slug; ?>"><?php echo $category->title; ?></a>
                             </li>
                         <?php endforeach; ?>
+                        <?php if (auth()): ?>
+                            <li>
+                                <a href="/cart">
+                                    Cart
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/checkout">
+                                    Checkout
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/profile">
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/logout">
+                                    Logout
+                                </a>
+                            </li>
+                        <?php else: ?>
+                            <li>
+                                <a href="/register">
+                                    Register
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/login">
+                                    Login
+                                </a>
+                            </li>
+                        <?php endif; ?>
                     </ul>
                 </div>
             </div>
